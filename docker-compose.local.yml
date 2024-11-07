@@ -1,0 +1,22 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: taskydb
+  tasky:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tasky
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGODB_URI=mongodb://root:rootpassword@mongodb:27017
+      - SECRET_KEY=halloween2024

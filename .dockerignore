@@ -1,0 +1,7 @@
+Dockerfile
+.gitignore
+mongo-init.js
+README.md
+.git/
+.github/
+.DS_Store
